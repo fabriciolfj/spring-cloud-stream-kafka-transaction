@@ -1,0 +1,44 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          transaction:
+            transaction-id-prefix: tx-
+          configuration:
+            isolation.level: read_committed
+            retries: 1
+            acks: all
+      bindings:
+        messageProcessor-in-0:
+          consumer:
+            destination: foo-topic
+            content-type: application/json
+            group: consumidor-person
+        messageProcessor-out-0:
+          producer:
+            destination: person-topic
+            content-type: application/json
+
+  application:
+    name: loan-shark
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+  datasource:
+    username: root
+    password: root
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    hikari:
+      maximum-pool-size: 15
+      connection-timeout: 2000
+      idle-timeout: 1000
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
