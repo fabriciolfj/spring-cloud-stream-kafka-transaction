@@ -1,5 +1,7 @@
 spring:
   cloud:
+    function:
+      definition: messageProcessor
     stream:
       kafka:
         binder:
@@ -11,14 +13,12 @@ spring:
             acks: all
       bindings:
         messageProcessor-in-0:
-          consumer:
-            destination: foo-topic
-            content-type: application/json
-            group: consumidor-person
+          destination: person-topic
+          content-type: application/json
+          group: consumidorPerson
         messageProcessor-out-0:
-          producer:
-            destination: person-topic
-            content-type: application/json
+          destination: person-topic
+          content-type: application/json
 
   application:
     name: loan-shark

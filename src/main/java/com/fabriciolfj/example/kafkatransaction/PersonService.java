@@ -15,7 +15,7 @@ public class PersonService {
     private final StreamBridge streamBridge;
 
     public void execute() {
-        streamBridge.send("recommendations-out-1", Person.builder()
+        streamBridge.send("messageProcessor-out-0", Person.builder()
                 .name("Fabricio")
                 .document(UUID.randomUUID().toString())
                 .build());
