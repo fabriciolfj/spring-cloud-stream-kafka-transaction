@@ -14,11 +14,8 @@ public class PersonService {
 
     private final StreamBridge streamBridge;
 
-    public void execute() {
-        streamBridge.send("messageProcessor-out-0", Person.builder()
-                .name("Fabricio")
-                .document(UUID.randomUUID().toString())
-                .build());
+    public void execute(Person person) {
+        streamBridge.send("messageProcessor-out-0", person);
 
         log.info("message send");
     }

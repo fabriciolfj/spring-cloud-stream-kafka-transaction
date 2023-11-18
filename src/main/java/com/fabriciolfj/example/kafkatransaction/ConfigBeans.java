@@ -9,20 +9,17 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.transaction.KafkaTransactionManager;
 import org.springframework.messaging.MessageChannel;
 
-@Configuration
+//@Configuration
 public class ConfigBeans {
 
-    @Autowired
+    //@Autowired
     DefaultBinderFactory binderFactory;
 
-    @Bean
+    //@Bean
     KafkaTransactionManager customKafkaTransactionManager() {
         KafkaMessageChannelBinder kafka = (KafkaMessageChannelBinder)this.binderFactory.getBinder("kafka", MessageChannel.class);
         ProducerFactory<byte[], byte[]> transactionalProducerFactory = kafka.getTransactionalProducerFactory();
         KafkaTransactionManager kafkaTransactionManager = new KafkaTransactionManager(transactionalProducerFactory);
         return kafkaTransactionManager;
     }
-
-
-
 }

@@ -21,7 +21,7 @@ spring:
           content-type: application/json
 
   application:
-    name: loan-shark
+    name: cloud-stream
   lifecycle:
     timeout-per-shutdown-phase: 15s
   datasource:
