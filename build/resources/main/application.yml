@@ -13,6 +13,8 @@ spring:
             acks: all
       bindings:
         messageProcessor-in-0:
+          consumer:
+            maxAttempts: 3
           destination: person-topic
           content-type: application/json
           group: consumidorPerson
