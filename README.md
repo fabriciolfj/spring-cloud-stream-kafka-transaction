@@ -6,6 +6,7 @@
   - consumidores com a configuração read_committed (padrão é read_uncomitted), ou seja, caso de alguma exception no produtor, a transação será revertida e o consumidor não receberá a mensagem
 - lembrando que o @EnableTransactionManagemt procura os @transaction e no contexto do kafka, é fornecido pelo bean custom salientado acima
 - outro ponto que a configuração spring.kafka.producer.transaction-id-prefix e para o spring kafka, para o cloud stream e este do project spring.cloud.stream.kafka.binder.transaction.transaction-id-prefix
+- mais um ponto importante, que a transacao garante a entregua extamente uma vez da mensagem (idempotente)
 
 ## transacão jpa com transação kafka.
 ```
@@ -23,3 +24,24 @@ obs:  ChainedTransactionManager (usado antigamente para mudar ordem  da transaç
 ## dlq
 - quando o número máximo de tentativas do consumidor ultrapassa, o spring cloud stream abre uma nova transação, confirma o offset da mensagem (para o consumidor não receber mais)
 - e após o mesmo envia ao um topic dlq especial
+
+## extamente uma vez
+- exemplo para garantir entrega uma vez para app usando kafka streams
+```
+spring:
+  cloud:
+    function:
+      definition: messageProcessor
+    stream:
+      kafka:
+        binder:
+          transaction:
+            transaction-id-prefix: tx-
+          configuration:
+            isolation.level: read_committed
+            retries: 1
+            acks: all
+            processing.guarantee: exactly_once
+```
+- Ao definir processing.guaranteecomo exactly_once, o Kafka Streams garante que, se ocorrer uma exceção durante essas atividades ou se o aplicativo travar, toda a unidade  
+  será revertida atomicamente como se nada tivesse acontecido

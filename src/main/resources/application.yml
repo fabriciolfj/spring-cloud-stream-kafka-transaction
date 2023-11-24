@@ -11,6 +11,7 @@ spring:
             isolation.level: read_committed
             retries: 1
             acks: all
+            processing.guarantee: exactly_once
       bindings:
         messageProcessor-in-0:
           consumer:
