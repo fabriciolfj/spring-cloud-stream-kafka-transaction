@@ -5,7 +5,7 @@
   - bean de transaçao do kafka, se não ele criará uma transaçao por evento enviado
   - consumidores com a configuração read_committed (padrão é read_uncomitted), ou seja, caso de alguma exception no produtor, a transação será revertida e o consumidor não receberá a mensagem
 - lembrando que o @EnableTransactionManagemt procura os @transaction e no contexto do kafka, é fornecido pelo bean custom salientado acima
-- outro ponto que a configuração spring.kafka.producer.transaction-id-prefix e para o spring kafka, para o cloud stream e este do project spring.cloud.stream.kafka.binder.transaction.transaction-id-prefix
+- outro ponto que a configuração spring.kafka.producer.transaction-id-prefix é para o spring kafka, ja para o cloud stream é este do project spring.cloud.stream.kafka.binder.transaction.transaction-id-prefix
 - mais um ponto importante, que a transacao garante a entregua extamente uma vez da mensagem (idempotente)
 
 ## transacão jpa com transação kafka.
