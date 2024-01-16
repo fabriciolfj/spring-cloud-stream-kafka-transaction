@@ -12,7 +12,7 @@
 ```
 O gerenciador de transações JPA inicia uma nova transação JPA.
 A operação do banco de dados começa, mas nenhum commit ocorre aqui, pois ainda estamos na execução do método.
-A StreamBridgeoperação de envio aciona uma nova transação Kafka, sincronizando com a transação JPA por meio do gerenciador de sincronização de transações.
+A StreamBridge operação de envio aciona uma nova transação Kafka, sincronizando com a transação JPA por meio do gerenciador de sincronização de transações.
 Quando o método termina, a transação JPA é confirmada primeiro, seguida pela transação Kafka.
 ```
 obs:  ChainedTransactionManager (usado antigamente para mudar ordem  da transação kafka com jpa, não é sincronismo), está obsoleta.
