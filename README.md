@@ -19,7 +19,7 @@ obs:  ChainedTransactionManager (usado antigamente para mudar ordem  da transaç
 - outro ponto, quando fornecemos um transactionManager customizado, o spring não fornece um JapTransactionManager por ex.
 - para utilizar uma transação distribuida, no caso de um consumidor pegar o dado do kafka e persistir na base, use a function Consumer.
   - caso precise depois mandar a mensagem para outro topic, não use a function (perde a transação atomica), no final use um streamBridge 
-
+ 
 
 ## dlq
 - quando o número máximo de tentativas do consumidor ultrapassa, o spring cloud stream abre uma nova transação, confirma o offset da mensagem (para o consumidor não receber mais)
