@@ -45,3 +45,4 @@ spring:
 ```
 - Ao definir processing.guaranteecomo exactly_once, o Kafka Streams garante que, se ocorrer uma exceção durante essas atividades ou se o aplicativo travar, toda a unidade  
   será revertida atomicamente como se nada tivesse acontecido
+  
